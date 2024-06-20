@@ -26,8 +26,8 @@ int main (int argc, char *argv[])
 
   // Creazione dei canali punto a punto
   PointToPointHelper pointToPoint;
-  pointToPoint.SetDeviceAttribute ("DataRate", StringValue ("5Mbps"));
-  pointToPoint.SetChannelAttribute ("Delay", StringValue ("2ms"));
+  pointToPoint.SetDeviceAttribute ("DataRate", StringValue ("50Mbps"));
+  pointToPoint.SetChannelAttribute ("Delay", StringValue ("1ms"));
 
   // Installazione dei dispositivi sui nodi
   NetDeviceContainer devices01, devices23;
@@ -61,12 +61,12 @@ int main (int argc, char *argv[])
   UdpEchoClientHelper echoClient01(interfaces01.GetAddress(1), 9);
   UdpEchoClientHelper echoClient23(interfaces23.GetAddress(1), 9);
 
-  echoClient01.SetAttribute("MaxPackets", UintegerValue(10));
-  echoClient01.SetAttribute("Interval", TimeValue(Seconds(1.0)));
+  echoClient01.SetAttribute("MaxPackets", UintegerValue(0));
+  echoClient01.SetAttribute("Interval", TimeValue(Seconds(0.01)));
   echoClient01.SetAttribute("PacketSize", UintegerValue(1024));
   
-  echoClient23.SetAttribute("MaxPackets", UintegerValue(10));
-  echoClient23.SetAttribute("Interval", TimeValue(Seconds(1.0)));
+  echoClient23.SetAttribute("MaxPackets", UintegerValue(0));
+  echoClient23.SetAttribute("Interval", TimeValue(Seconds(0.01)));
   echoClient23.SetAttribute("PacketSize", UintegerValue(1024));
 
   ApplicationContainer clientApps01 = echoClient01.Install(nodes.Get(0));
